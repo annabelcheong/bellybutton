@@ -38,19 +38,20 @@ function init() {
         
         names_list.forEach((name_ID)=>{
             console.log(name_ID);
+            //Append into html <option> and the name_ID as the value
             dropdownMenu
             .append('option')
             .text(name_ID)
             .property('value');
             });
+
     });
-        
 
     info_table = d3.select("#sample-metadata");
-
-//     //remove everything in the sample-metadata
+    //remove everything in the sample-metadata
     info_table.html("");
     //Append data into the table 
+
     row = info_table.append("p")
     row.text("In the above dropdown, select an ID.");
     
@@ -71,68 +72,38 @@ function init() {
 
 };
         
+// When user selects an ID, run function 'optionChanged'
+id_selection = d3.select("#selDataset").on("change", optionChanged);
+
+// // // FUNCTION 'optionChanged' ON CHANGE: This function is called when a dropdown menu item is selected
+function optionChanged(id){
+
+    if (id === 941){
+        var info_table = d3.select("#sample-metadata");
+        info_table.html("");
         
-    // for (var i=0; i<idNo.length;i++){
-    //     // $("#sample-metadata").append("<option>"+ idNo[i].Text+ "</option>")        
-    //     //  $("#selDataset").append("<option value='>" + 
-    //     //  idNo[i] + "<'/option")
+        //Append data into table
 
-    //     var dropdownMenu = d3.select("#selDataset");
-    //     dataset = dropdownMenu.property("value");
+        d3.json("./data/samples.json").then((importedData) => {
+            var data = importedData;
+            var metadata = data.metadata;
+            //Variables in the object
+            var idNo = metadata.map(obj=>obj.id);
+            var ethnic = metadata.map(obj=>obj.ethnicity);
+            var gender = metadata.map(obj=>obj.gender);
+            var age = metadata.map(obj=>obj.age);
+            var loc = metadata.map(obj=>obj.location);
+            var bbtype = metadata.map(obj=>obj.bbtype);
+            var wfreq = metadata.map(obj=>obj.wfreq);
 
-    //     if (dataset === idNo[i]){
-            
-    //         row = info_table.html("");
-    //         row.text("HELLO");
-    //     }
-
-
-    // }
-    // });
-
-   // Select id sample-metadata in index.html
-//    info_table = d3.select("#sample-metadata");
-
-//    // Ensure a 'clean' slate to begin with
-//    info_table.html("");
-     
-//    //Append data into the table 
-//    row = info_table.append("p")
-//    row.text("In the above dropdown, select an ID.");
+        row = info_table.append("p")
+        row.text("jjjjjjj In the above dropdown, select an ID.");
+    });
+    };
 
 
 
-    // row = info_table.append("p")
-    // row.text("id: ");
-    // row = info_table.append("p")
-    // row.text("ethnicity: ");
-    // row = info_table.append("p")
-    // row.text("gender: ");
-    // row = info_table.append("p")
-    // row.text("age: ");
-    // row = info_table.append("p")
-    // row.text("location: ");
-    // row = info_table.append("p")
-    // row.text("bbtype: ");
-    // row = info_table.append("p")
-    // row.text("wfreq: ");
-
-
-
-// When user selects an ID, run function 'updateIDTable'
-//     id_selection = d3.select("#selDataset").on("change", optionChanged);
-
-// // FUNCTION 'updateIdTable' ON CHANGE: This function is called when a dropdown menu item is selected
-// function optionChanged(){
-
-//     for (var i=0; i<idNo.length;i++){
-//         $("#sample-metadata").append("<option>"+ idNo[i].Text+ "</option>")
-//     }
-
-
-
-
- 
+};
 
 // // This function is called when a dropdown menu item is selected
 // function updatePlotly() {
