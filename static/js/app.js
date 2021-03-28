@@ -79,24 +79,21 @@ id_selection = d3.select("#selDataset").on("change", optionChanged);
 function optionChanged(idNo){
     
     //Append data into table
-
     d3.json("./data/samples.json").then((importedData) => {
-        var metadata = importedData.metadata;
+        var metaInfo = importedData.metadata;
         //Variables in the object
-        filteredInfo = metadata.filter(obj => obj.id == idNo)
+        filteredInfo = metaInfo.filter(obj => obj.id == idNo);
+        var selectedInfo = filteredInfo[0];
 
         console.log(filteredInfo);
         var info_table = d3.select("#sample-metadata");
         //remove everything in the sample-metadata
         info_table.html("");
         
-        Object.entries(filteredInfo).forEach(([key, value]) => {
+        Object.entries(selectedInfo).forEach(([key, value]) => {
         console.log(key, value);
         info_table.append("p")
-        .text(`${key}: ${value}`);
-       
-        // .text(key)
-        // .property('value');
+        .text(`${key}: ${value}`)
         });
         
         // var idNo = metadata.map(obj=>obj.id);
