@@ -22,20 +22,17 @@ d3.json("./data/samples.json").then((importedData) => {
     // console.log(wfreq);
 });
 
-// var data = [];
+// Initializes the page with a default plot
+function init() {
 
-//     //append to the html code as list: id="sample-metadata"
+    // Select id sample-metadata in index.html
     info_table = d3.select("#sample-metadata");
-//     //remove everything in the sample-metadata
+
+    // Ensure a 'clean' slate to begin with
     info_table.html("");
-//     //Extract out the data 
-    // for (i=0,i<idNo.length,i++)
-    // if (dataset == idno[i]){    
-
-
-//     //Append data into the table 
+      
+    //Append data into the table 
     row = info_table.append("p")
-    // var row = div.append("ul");
     row.text("id:");
     row = info_table.append("p")
     row.text("ethnicity:");
@@ -50,8 +47,37 @@ d3.json("./data/samples.json").then((importedData) => {
     row = info_table.append("p")
     row.text("wfreq:");
 
-    // }
-// }
+}
+
+
+// var data = [];
+
+//     //append to the html code as list: id="sample-metadata"
+    info_table = d3.select("#sample-metadata").on("change",updateIdTable);
+
+// This function is called when a dropdown menu item is selected
+function updateIdTable(){
+//     //remove everything in the sample-metadata
+    info_table.html("");
+
+
+//     //Append data into the table 
+    row = info_table.append("p")
+    row.text("id:");
+    row = info_table.append("p")
+    row.text("ethnicity:");
+    row = info_table.append("p")
+    row.text("gender:");
+    row = info_table.append("p")
+    row.text("age:");
+    row = info_table.append("p")
+    row.text("location:");
+    row = info_table.append("p")
+    row.text("bbtype:");
+    row = info_table.append("p")
+    row.text("wfreq:");
+
+}
 
 
 
@@ -77,3 +103,9 @@ d3.json("./data/samples.json").then((importedData) => {
 //     if (dataset == '940') {
 //         data = idNo
 //     }
+
+
+
+
+// run function init()
+init();
