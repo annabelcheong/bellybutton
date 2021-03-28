@@ -5,24 +5,29 @@ d3.json("./data/samples.json").then((importedData) => {
     var data = importedData;
     // console.log(data);
     metadata = data.metadata;
-    console.log(data.metadata);
+    console.log(metadata);
     idNo = metadata.map(obj=>obj.id);
     // console.log(idNo);
-    ethnic = metadata.map(obj=>obj.ethnicity);
-    // console.log(ethnic);
-    gender = metadata.map(obj=>obj.gender);
-    // console.log(gender);
-    age = metadata.map(obj=>obj.age);
-    // console.log(age);
-    loc = metadata.map(obj=>obj.location);
-    // console.log(loc); 
-    bbtype = metadata.map(obj=>obj.bbtype);
-    // console.log(bbtype);
-    wfreq = metadata.map(obj=>obj.wfreq);
+    // for (var i=0; i<idNo.length; i++){
+    //     console.log(idNo[i])
+    // }
+    // ethnic = metadata.map(obj=>obj.ethnicity);
+    // // console.log(ethnic);
+    // gender = metadata.map(obj=>obj.gender);
+    // // console.log(gender);
+    // age = metadata.map(obj=>obj.age);
+    // // console.log(age);
+    // loc = metadata.map(obj=>obj.location);
+    // // console.log(loc); 
+    // bbtype = metadata.map(obj=>obj.bbtype);
+    // // console.log(bbtype);
+    // wfreq = metadata.map(obj=>obj.wfreq);
     // console.log(wfreq);
+   
+    
 });
 
-// Initializes the page with a default plot
+// FUNCTION 'init': Initializes the page with a default plot
 function init() {
 
     // Select id sample-metadata in index.html
@@ -33,49 +38,102 @@ function init() {
       
     //Append data into the table 
     row = info_table.append("p")
-    row.text("id:");
-    row = info_table.append("p")
-    row.text("ethnicity:");
-    row = info_table.append("p")
-    row.text("gender:");
-    row = info_table.append("p")
-    row.text("age:");
-    row = info_table.append("p")
-    row.text("location:");
-    row = info_table.append("p")
-    row.text("bbtype:");
-    row = info_table.append("p")
-    row.text("wfreq:");
+    row.text("In the above dropdown, select an ID.");
+
+
+    d3.json("./data/samples.json").then((importedData) => {
+        var data = importedData;
+        metadata = data.metadata;
+    idNo = metadata.map(obj=>obj.id);
+    for (var i=0; i<idNo.length;i++){
+        // $("#sample-metadata").append("<option>"+ idNo[i].Text+ "</option>")        
+         $("#selDataset").append("<option value='>" + 
+         idNo[i] + "<'/option")
+    }
+    });
+
+
+
+
+
+    // row = info_table.append("p")
+    // row.text("id: ");
+    // row = info_table.append("p")
+    // row.text("ethnicity: ");
+    // row = info_table.append("p")
+    // row.text("gender: ");
+    // row = info_table.append("p")
+    // row.text("age: ");
+    // row = info_table.append("p")
+    // row.text("location: ");
+    // row = info_table.append("p")
+    // row.text("bbtype: ");
+    // row = info_table.append("p")
+    // row.text("wfreq: ");
 
 }
 
+// When user selects an ID, run function 'updateIDTable'
+    id_selection = d3.select("#selDataset").on("change", optionChanged);
 
-// var data = [];
+// FUNCTION 'updateIdTable' ON CHANGE: This function is called when a dropdown menu item is selected
+function optionChanged(){
 
-//     //append to the html code as list: id="sample-metadata"
-    info_table = d3.select("#sample-metadata").on("change",updateIdTable);
+    for (var i=0; i<idNo.length;i++){
+        $("#sample-metadata").append("<option>"+ idNo[i].Text+ "</option>")
+    }
 
-// This function is called when a dropdown menu item is selected
-function updateIdTable(){
+
+
+
+    // var dataset = dropdownMenu.property("value");
+    
+    // for (var i=0; i<idNo.length; i++){
+    //     console.log(idNo[i])
+
+
+
+
+
+
+
+    //     if (dataset === idNo[i]){
+    //     console.log("hello, this is id 940.")
+
+    //     }
+
+
+
+    // }
+    // Assign the value of the dropdown menu option to a variable
+    //   var dataset = dropdownMenu."hello";
+    
+    //     if (dataset == '940') {
+    //         data = "hello";
+    //     }
+    
+
+
+
+
+
 //     //remove everything in the sample-metadata
     info_table.html("");
-
-
 //     //Append data into the table 
     row = info_table.append("p")
-    row.text("id:");
+    row.text("id: ");
     row = info_table.append("p")
-    row.text("ethnicity:");
+    row.text("ethnicity: ");
     row = info_table.append("p")
-    row.text("gender:");
+    row.text("gender: ");
     row = info_table.append("p")
-    row.text("age:");
+    row.text("age: ");
     row = info_table.append("p")
-    row.text("location:");
+    row.text("location: ");
     row = info_table.append("p")
-    row.text("bbtype:");
+    row.text("bbtype: ");
     row = info_table.append("p")
-    row.text("wfreq:");
+    row.text("wfreq: ");
 
 }
 
