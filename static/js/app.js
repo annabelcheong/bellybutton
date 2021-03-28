@@ -30,29 +30,75 @@ d3.json("./data/samples.json").then((importedData) => {
 // FUNCTION 'init': Initializes the page with a default plot
 function init() {
 
-    // Select id sample-metadata in index.html
-    info_table = d3.select("#sample-metadata");
-
-    // Ensure a 'clean' slate to begin with
-    info_table.html("");
-      
-    //Append data into the table 
-    row = info_table.append("p")
-    row.text("In the above dropdown, select an ID.");
-
+    var dropdownMenu = d3.select("#selDataset");
 
     d3.json("./data/samples.json").then((importedData) => {
         var data = importedData;
-        metadata = data.metadata;
-    idNo = metadata.map(obj=>obj.id);
-    for (var i=0; i<idNo.length;i++){
-        // $("#sample-metadata").append("<option>"+ idNo[i].Text+ "</option>")        
-         $("#selDataset").append("<option value='>" + 
-         idNo[i] + "<'/option")
-    }
+        var names_list = data.names;
+        
+        names_list.forEach((name_ID)=>{
+            console.log(name_ID);
+            dropdownMenu
+            .append('option')
+            .text(name_ID)
+            .property('value');
+            });
     });
+        
+
+    info_table = d3.select("#sample-metadata");
+
+//     //remove everything in the sample-metadata
+    info_table.html("");
+    //Append data into the table 
+    row = info_table.append("p")
+    row.text("In the above dropdown, select an ID.");
+    
+    // row = info_table.append("p")
+    // row.text("id: ";
+    // row = info_table.append("p")
+    // row.text("ethnicity: ");
+    // row = info_table.append("p")
+    // row.text("gender: ");
+    // row = info_table.append("p")
+    // row.text("age: ");
+    // row = info_table.append("p")
+    // row.text("location: ");
+    // row = info_table.append("p")
+    // row.text("bbtype: ");
+    // row = info_table.append("p")
+    // row.text("wfreq: ");
+
+};
+        
+        
+    // for (var i=0; i<idNo.length;i++){
+    //     // $("#sample-metadata").append("<option>"+ idNo[i].Text+ "</option>")        
+    //     //  $("#selDataset").append("<option value='>" + 
+    //     //  idNo[i] + "<'/option")
+
+    //     var dropdownMenu = d3.select("#selDataset");
+    //     dataset = dropdownMenu.property("value");
+
+    //     if (dataset === idNo[i]){
+            
+    //         row = info_table.html("");
+    //         row.text("HELLO");
+    //     }
 
 
+    // }
+    // });
+
+   // Select id sample-metadata in index.html
+//    info_table = d3.select("#sample-metadata");
+
+//    // Ensure a 'clean' slate to begin with
+//    info_table.html("");
+     
+//    //Append data into the table 
+//    row = info_table.append("p")
+//    row.text("In the above dropdown, select an ID.");
 
 
 
@@ -71,85 +117,22 @@ function init() {
     // row = info_table.append("p")
     // row.text("wfreq: ");
 
-}
+
 
 // When user selects an ID, run function 'updateIDTable'
-    id_selection = d3.select("#selDataset").on("change", optionChanged);
+//     id_selection = d3.select("#selDataset").on("change", optionChanged);
 
-// FUNCTION 'updateIdTable' ON CHANGE: This function is called when a dropdown menu item is selected
-function optionChanged(){
+// // FUNCTION 'updateIdTable' ON CHANGE: This function is called when a dropdown menu item is selected
+// function optionChanged(){
 
-    for (var i=0; i<idNo.length;i++){
-        $("#sample-metadata").append("<option>"+ idNo[i].Text+ "</option>")
-    }
-
-
-
-
-    // var dataset = dropdownMenu.property("value");
-    
-    // for (var i=0; i<idNo.length; i++){
-    //     console.log(idNo[i])
+//     for (var i=0; i<idNo.length;i++){
+//         $("#sample-metadata").append("<option>"+ idNo[i].Text+ "</option>")
+//     }
 
 
 
 
-
-
-
-    //     if (dataset === idNo[i]){
-    //     console.log("hello, this is id 940.")
-
-    //     }
-
-
-
-    // }
-    // Assign the value of the dropdown menu option to a variable
-    //   var dataset = dropdownMenu."hello";
-    
-    //     if (dataset == '940') {
-    //         data = "hello";
-    //     }
-    
-
-
-
-
-
-//     //remove everything in the sample-metadata
-    info_table.html("");
-//     //Append data into the table 
-    row = info_table.append("p")
-    row.text("id: ");
-    row = info_table.append("p")
-    row.text("ethnicity: ");
-    row = info_table.append("p")
-    row.text("gender: ");
-    row = info_table.append("p")
-    row.text("age: ");
-    row = info_table.append("p")
-    row.text("location: ");
-    row = info_table.append("p")
-    row.text("bbtype: ");
-    row = info_table.append("p")
-    row.text("wfreq: ");
-
-}
-
-
-
-// // Initializes the page with a default plot
-// function init() {
-//     data = [{
-//       x: [1, 2, 3, 4, 5],
-//       y: [1, 2, 4, 8, 16] }];
-  
-//     Plotly.newPlot("plot", data);
-//   }
-
-// // Call updatePlotly() when a change takes place to the DOM
-// d3.selectAll("#selDataset").on("change", updatePlotly);
+ 
 
 // // This function is called when a dropdown menu item is selected
 // function updatePlotly() {
@@ -158,9 +141,6 @@ function optionChanged(){
 //   // Assign the value of the dropdown menu option to a variable
 //   var dataset = dropdownMenu.property("value");
 
-//     if (dataset == '940') {
-//         data = idNo
-//     }
 
 
 
