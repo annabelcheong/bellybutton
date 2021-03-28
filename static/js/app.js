@@ -52,8 +52,8 @@ function init() {
     info_table.html("");
     //Append data into the table 
 
-    row = info_table.append("p")
-    row.text("In the above dropdown, select an ID.");
+    info_table.append("p")
+    .text("In the above dropdown, select an ID.");
     
     // row = info_table.append("p")
     // row.text("id: ";
@@ -76,34 +76,49 @@ function init() {
 id_selection = d3.select("#selDataset").on("change", optionChanged);
 
 // // // FUNCTION 'optionChanged' ON CHANGE: This function is called when a dropdown menu item is selected
-function optionChanged(id){
+function optionChanged(idNo){
+    
+    //Append data into table
 
-    if (id === 941){
+    d3.json("./data/samples.json").then((importedData) => {
+        var metadata = importedData.metadata;
+        //Variables in the object
+        filteredInfo = metadata.filter(obj => obj.id == idNo)
+
+        console.log(filteredInfo);
         var info_table = d3.select("#sample-metadata");
+        //remove everything in the sample-metadata
         info_table.html("");
         
-        //Append data into table
+        Object.entries(filteredInfo).forEach(([key, value]) => {
+        console.log(key, value);
+        info_table.append("p")
+        .text(`${key}: ${value}`);
+       
+        // .text(key)
+        // .property('value');
+        });
+        
+        // var idNo = metadata.map(obj=>obj.id);
+        // row = info_table.append("p").text(id).property('value');
+        
+        
+        // var ethnic = metadata.map(obj=>obj.ethnicity);
+        // var gender = metadata.map(obj=>obj.gender);
+        // var age = metadata.map(obj=>obj.age);
+        // var loc = metadata.map(obj=>obj.location);
+        // var bbtype = metadata.map(obj=>obj.bbtype);
+        // var wfreq = metadata.map(obj=>obj.wfreq);
 
-        d3.json("./data/samples.json").then((importedData) => {
-            var data = importedData;
-            var metadata = data.metadata;
-            //Variables in the object
-            var idNo = metadata.map(obj=>obj.id);
-            var ethnic = metadata.map(obj=>obj.ethnicity);
-            var gender = metadata.map(obj=>obj.gender);
-            var age = metadata.map(obj=>obj.age);
-            var loc = metadata.map(obj=>obj.location);
-            var bbtype = metadata.map(obj=>obj.bbtype);
-            var wfreq = metadata.map(obj=>obj.wfreq);
-
-        row = info_table.append("p")
-        row.text("jjjjjjj In the above dropdown, select an ID.");
+    // row = info_table.append("p")
+    // row.text("The ID you selected have the demographic info as follows:");
     });
-    };
-
-
 
 };
+
+
+
+
 
 // // This function is called when a dropdown menu item is selected
 // function updatePlotly() {
