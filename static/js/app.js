@@ -149,17 +149,18 @@ function optionChanged(idNo){
     var trace2 = {
         x: samp_otu_id,
         y: sample_vals,
+        mode: 'markers',
         marker: {
-            size: sample_vals//, //marker size [40, 60, 80, 100,50,20,20,10,20,50], 
-            //color: samp_otu_id, //otu_ids for the marker colours
+            size: sample_vals, //marker size [40, 60, 80, 100,50,20,20,10,20,50], 
+            color: samp_otu_id, //otu_ids for the marker colours
         }
-        // text: otu_labs,
+        //text: otu_labs,
     };
 
     var data1 = [trace2];
 
     var layout1 = {
-        title: 'Marker Size',
+        title: 'OTU ID and Values',
         showlegend: false,
         height: 600,
         width: 600
