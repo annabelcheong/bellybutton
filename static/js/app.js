@@ -84,19 +84,61 @@ function optionChanged(idNo){
         var filteredInfo = metaInfo.filter(obj => obj.id == idNo);
         // console.log(filteredInfo);
         var selectedInfo = filteredInfo[0];
-        
-        var info_table = d3.select("#sample-metadata");
+        console.log(selectedInfo);
+        info_table = d3.select("#sample-metadata");
         //remove everything in the sample-metadata
         // info_table.html("");
 
+        // APPEND TO INFO TABLE THE ID's DATA ON HTML
         Object.entries(selectedInfo).forEach(([key, value]) => {
                 console.log(key, value);
                 info_table.append("h6").text(`${key}: ${value}`);
                 console.log(info_table);
-
             });
-       
     });
+
+    // HORIZONTAL BAR CHART
+    // Extract out id, otu_ids, sample_values
+    d3.json("./data/samples.json").then((data) => {
+    var metaData = data.samples;
+        // console.log(metaData);
+    filteredSampInfo = metaData.filter(obj => obj.id == idNo)[0];
+    console.log(filteredSampInfo);
+
+    // x-values: otu_ids
+    samp_otu_id = filteredSampInfo.otu_ids;
+    console.log(samp_otu_id);
+    // y-values: sample_values
+    sample_vals = filteredSampInfo.sample_values;
+    console.log(sample_vals);
+
+    });
+
+    var trace1 = {
+        x: samp_otu_id,
+        y: sample_vals,
+        type: "bar"
+    };
+
+    var data = [trace1];
+
+    Plotly.newPlot("bar", data);
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 };
 
