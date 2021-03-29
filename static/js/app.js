@@ -102,48 +102,41 @@ function optionChanged(idNo){
     d3.json("./data/samples.json").then((data) => {
     var metaData = data.samples;
         // console.log(metaData);
+
     var filteredSampInfo = metaData.filter(obj => obj.id == idNo)[0];
-    console.log(filteredSampInfo);
+    console.log(filteredSampInfo); 
 
     // x-values: otu_ids
     var samp_otu_id = filteredSampInfo.otu_ids;
-    console.log(samp_otu_id);
-    // y-values: sample_values
-    var sample_vals = filteredSampInfo.sample_values;
-    console.log(sample_vals);
+    // console.log(samp_otu_id);
+    top_otu_id = samp_otu_id.slice(0,10);
+    console.log(top_otu_id)
 
+    // y-values: sample_values *Sample values are already descending in samples.json data
+    var sample_vals = filteredSampInfo.sample_values;
+    // console.log(sample_vals);
+    top_sample_vals = sample_vals.slice(0,10);
+    console.log(top_sample_vals);
     });
 
     var trace1 = {
-        x: sample_vals,
-        y: samp_otu_id,
+        // x: sample_vals,
+        // y: samp_otu_id,
+        y: top_otu_id,
+        x: top_sample_vals,
         type: "bar",
-        orientation: "h"
+        orientation: 'h'
     };
 
     var data = [trace1];
 
     var layout = {
-        title: "OTU IDs vs Sample Values"
-    }
+        title: "OTU IDs vs Sample Values",
+        xaxis: {title: "Sample Values"},
+        yaxis: {title:"OTU IDs"}
+    };
 
     Plotly.newPlot("bar", data, layout);
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 };
 
