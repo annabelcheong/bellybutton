@@ -122,12 +122,17 @@ function optionChanged(idNo){
     // top_sample_vals = top_sample_vals.reverse();
     console.log(top_sample_vals);
 
+    //otu_labels (for the bubble chart)
+    var otu_labs = filteredSampInfo.otu_labels;
+
     var trace1 = {
         x: top_sample_vals.reverse(),
         y: str_top_otu_id.reverse(),
         type: "bar",
         orientation: 'h'
     };
+
+    //Plot the bar chart
 
     var data = [trace1];
 
@@ -138,6 +143,24 @@ function optionChanged(idNo){
     };
 
     Plotly.newPlot("bar", data, layout);
+
+    //Plot the bubble chart
+
+    var trace1 = {
+        y: sample_vals,
+        x: samp_otu_id,
+        marker: {
+            size: sample_values, //marker size
+            color: samp_otu_id, //otu_ids for the marker colours
+        }
+        // text: otu_labs,
+    };
+
+    // var data = [trace1];
+    // Plotly.newPlot("bubble", data);
+
+
+
 });
 };
 
