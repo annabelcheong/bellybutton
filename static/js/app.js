@@ -102,27 +102,32 @@ function optionChanged(idNo){
     d3.json("./data/samples.json").then((data) => {
     var metaData = data.samples;
         // console.log(metaData);
-    filteredSampInfo = metaData.filter(obj => obj.id == idNo)[0];
+    var filteredSampInfo = metaData.filter(obj => obj.id == idNo)[0];
     console.log(filteredSampInfo);
 
     // x-values: otu_ids
-    samp_otu_id = filteredSampInfo.otu_ids;
+    var samp_otu_id = filteredSampInfo.otu_ids;
     console.log(samp_otu_id);
     // y-values: sample_values
-    sample_vals = filteredSampInfo.sample_values;
+    var sample_vals = filteredSampInfo.sample_values;
     console.log(sample_vals);
 
     });
 
     var trace1 = {
-        x: samp_otu_id,
-        y: sample_vals,
-        type: "bar"
+        x: sample_vals,
+        y: samp_otu_id,
+        type: "bar",
+        orientation: "h"
     };
 
     var data = [trace1];
 
-    Plotly.newPlot("bar", data);
+    var layout = {
+        title: "OTU IDs vs Sample Values"
+    }
+
+    Plotly.newPlot("bar", data, layout);
     
 
 
