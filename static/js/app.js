@@ -1,12 +1,12 @@
 // Use D3 fetch to read the JSON file
 // The data from the JSON file is arbitrarily named importedData as the argument
-d3.json("./data/samples.json").then((importedData) => {
-    // console.log(importedData);
-    var data = importedData;
-    // console.log(data);
-    var metadata = data.metadata;
-    console.log(metadata);
-    var idNo = metadata.map(obj=>obj.id);
+// d3.json("./data/samples.json").then((importedData) => {
+//     // console.log(importedData);
+//     var data = importedData;
+//     // console.log(data);
+//     var metadata = data.metadata;
+//     console.log(metadata);
+//     var idNo = metadata.map(obj=>obj.id);
     // console.log(idNo);
     // for (var i=0; i<idNo.length; i++){
     //     console.log(idNo[i])
@@ -25,7 +25,7 @@ d3.json("./data/samples.json").then((importedData) => {
     // console.log(wfreq);
    
     
-});
+// });
 
 // FUNCTION 'init': Initializes the page with a default plot
 function init() {
@@ -44,7 +44,6 @@ function init() {
             .text(name_ID)
             .property('value');
             });
-
     });
 
     info_table = d3.select("#sample-metadata");
@@ -77,25 +76,25 @@ id_selection = d3.select("#selDataset").on("change", optionChanged);
 
 // // // FUNCTION 'optionChanged' ON CHANGE: This function is called when a dropdown menu item is selected
 function optionChanged(idNo){
-    
+    info_table.html("");
     //Append data into table
     d3.json("./data/samples.json").then((importedData) => {
         var metaInfo = importedData.metadata;
         //Variables in the object
         var filteredInfo = metaInfo.filter(obj => obj.id == idNo);
+        // console.log(filteredInfo);
         var selectedInfo = filteredInfo[0];
-        console.log(filteredInfo);
+        
         var info_table = d3.select("#sample-metadata");
         //remove everything in the sample-metadata
-        info_table.html("");
-        
+        // info_table.html("");
+
         Object.entries(selectedInfo).forEach(([key, value]) => {
                 console.log(key, value);
-                info_table.append("h6").text(`${key}: ${value}`)
-            });
+                info_table.append("h6").text(`${key}: ${value}`);
+                console.log(info_table);
 
-        info_table.append("h6").text("End of the info box");
-       
+            });
        
     });
 
@@ -114,8 +113,6 @@ function optionChanged(idNo){
 
     // row = info_table.append("p")
     // row.text("The ID you selected have the demographic info as follows:");
-
-
 
 
 // run function init()
