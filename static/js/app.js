@@ -83,20 +83,27 @@ function optionChanged(idNo){
         var metaInfo = importedData.metadata;
         //Variables in the object
         filteredInfo = metaInfo.filter(obj => obj.id == idNo);
-        var selectedInfo = filteredInfo[0];
+        // var selectedInfo = filteredInfo[0];
 
         console.log(filteredInfo);
         var info_table = d3.select("#sample-metadata");
         //remove everything in the sample-metadata
         info_table.html("");
         
-        Object.entries(selectedInfo).forEach(([key, value]) => {
+        Object.entries(filteredInfo).forEach(([key, value]) => {
         console.log(key, value);
-        info_table.append("p")
-        .text(`${key}: ${value}`)
+        info_table.append("p").text(`${key}: ${value}`);
+        info_table.append("p").text("Inside object.entries");
         });
-        
-        // var idNo = metadata.map(obj=>obj.id);
+
+        info_table.append("p").text("End of the info box");
+        // info_table.append("p")
+       
+    });
+
+};
+
+ // var idNo = metadata.map(obj=>obj.id);
         // row = info_table.append("p").text(id).property('value');
         
         
@@ -109,21 +116,6 @@ function optionChanged(idNo){
 
     // row = info_table.append("p")
     // row.text("The ID you selected have the demographic info as follows:");
-    });
-
-};
-
-
-
-
-
-// // This function is called when a dropdown menu item is selected
-// function updatePlotly() {
-//   // Use D3 to select the dropdown menu
-//   var dropdownMenu = d3.select("#selDataset");
-//   // Assign the value of the dropdown menu option to a variable
-//   var dataset = dropdownMenu.property("value");
-
 
 
 
