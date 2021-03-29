@@ -111,19 +111,20 @@ function optionChanged(idNo){
     // console.log(samp_otu_id);
     var top_otu_id = samp_otu_id.slice(0,10);
     console.log(top_otu_id);
+    var str_top_otu_id = top_otu_id.map(obj => "OTU "+ obj);
+    // str_top_otu_id = str_top_otu_id.reverse();
+    console.log(str_top_otu_id);
 
     // y-values: sample_values *Sample values are already descending in samples.json data
     var sample_vals = filteredSampInfo.sample_values;
     // console.log(sample_vals);
     var top_sample_vals = sample_vals.slice(0,10);
+    // top_sample_vals = top_sample_vals.reverse();
     console.log(top_sample_vals);
-    });
 
     var trace1 = {
-        // x: [2,4,6],
-        // y: [10,20,30],
-        y: top_otu_id,
-        x: top_sample_vals,
+        x: top_sample_vals.reverse(),
+        y: str_top_otu_id.reverse(),
         type: "bar",
         orientation: 'h'
     };
@@ -137,7 +138,7 @@ function optionChanged(idNo){
     };
 
     Plotly.newPlot("bar", data, layout);
-
+});
 };
 
  // var idNo = metadata.map(obj=>obj.id);
