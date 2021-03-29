@@ -4,9 +4,9 @@ d3.json("./data/samples.json").then((importedData) => {
     // console.log(importedData);
     var data = importedData;
     // console.log(data);
-    metadata = data.metadata;
+    var metadata = data.metadata;
     console.log(metadata);
-    idNo = metadata.map(obj=>obj.id);
+    var idNo = metadata.map(obj=>obj.id);
     // console.log(idNo);
     // for (var i=0; i<idNo.length; i++){
     //     console.log(idNo[i])
@@ -82,22 +82,20 @@ function optionChanged(idNo){
     d3.json("./data/samples.json").then((importedData) => {
         var metaInfo = importedData.metadata;
         //Variables in the object
-        filteredInfo = metaInfo.filter(obj => obj.id == idNo);
-        // var selectedInfo = filteredInfo[0];
-
+        var filteredInfo = metaInfo.filter(obj => obj.id == idNo);
+        var selectedInfo = filteredInfo[0];
         console.log(filteredInfo);
         var info_table = d3.select("#sample-metadata");
         //remove everything in the sample-metadata
         info_table.html("");
         
-        Object.entries(filteredInfo).forEach(([key, value]) => {
-        console.log(key, value);
-        info_table.append("p").text(`${key}: ${value}`);
-        info_table.append("p").text("Inside object.entries");
-        });
+        Object.entries(selectedInfo).forEach(([key, value]) => {
+                console.log(key, value);
+                info_table.append("h6").text(`${key}: ${value}`)
+            });
 
-        info_table.append("p").text("End of the info box");
-        // info_table.append("p")
+        info_table.append("h6").text("End of the info box");
+       
        
     });
 
