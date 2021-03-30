@@ -1,7 +1,7 @@
 function addGauge(idNo){
 
     //Select html id gauge
-    info_table = d3.select("#gauge");
+    //info_table = d3.select("#gauge");
 
     //Remove everything in the sample-metadata
     // info_table.html("");
@@ -25,24 +25,48 @@ function addGauge(idNo){
             var filterIdData = metadata.filter(obj=>obj.id == idNo);
                 console.log(filterIdData);
             
-            var washFreq = filterIdData.map(obj=> obj.wfreq)[0];
-                console.log(washFreq);
+            // var washFreq = filterIdData.map(obj=> obj.wfreq)[0];
+            //     console.log(washFreq);
             
         
         // Example from plotly with my edited data
-            var data = [
+            // var data = [
+            //     {
+            //         domain: { x: [0, 1], y: [0, 1] },
+            //         value: 5,
+            //         title: { text: "Wash Frequency" },
+            //         type: "indicator",
+            //         mode: "gauge+number",
+            //         gauge: {axis:{range:[null,8]}}
+            //     }
+            // ];
+
+            var washFreq = parseFloat(filterIdData[0].wfreq);
+            console.log(washFreq);
+
+            var gaugeData = [
                 {
-                    domain: { x: [0, 1], y: [0, 1] },
-                    value: washFreq,
-                    title: { text: "Wash Frequency" },
-                    type: "indicator",
-                    mode: "gauge+number",
-                    gauge: {axis:{range:[null,7]}}
+                  domain: { x: [0, 1], y: [0, 1] },
+                  value: washFreq,
+                  title: { text: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week"},
+                  type: "indicator",
+                  mode: "gauge+number",
+                  gauge: {
+                    axis: { range: [null, 10] },
+                    bar: { color: "black"},
+                    steps: [
+                      { range: [0, 2], color: "red" },
+                      { range: [2, 4], color: "orange" },
+                      { range: [4, 6], color: "yellow" },
+                      { range: [6, 8], color: "yellowgreen" },
+                      { range: [8, 10], color: "green" }
+                    ],
+                  }
                 }
-            ];
-            
+              ];
             var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
-            Plotly.newPlot('gauge', data, layout);
+            
+            Plotly.newPlot('gauge', gaugeData, layout);
     
         });
     
