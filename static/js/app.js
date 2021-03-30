@@ -93,7 +93,7 @@ id_selection = d3.select("#selDataset").on("change", optionChanged);
 function optionChanged(idNo){    
     addDemoInfo(idNo);
     addCharts(idNo);
-    addGauge(idNo);
+    addGauge();
 };
 
 
