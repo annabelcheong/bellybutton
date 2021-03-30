@@ -76,7 +76,7 @@ function init() {
         addCharts(firstId);
 
         // Run function to add Gauge about id 940.
-        addGauge();
+        addGauge(firstId);
             // $.getscript("bonus.js",function(){
             //     addGauge();
             // });

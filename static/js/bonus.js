@@ -1,6 +1,4 @@
-function addGauge(){
-
-
+function addGauge(idNo){
 
     //Select html id gauge
     info_table = d3.select("#gauge");
@@ -14,17 +12,28 @@ function addGauge(){
 
     // Use D3 fetch to read the JSON file
     // The data from the JSON file is arbitrarily named importedData as the argument
+        // d3.json("./data/samples.json").then((importedData) => {
+        //     var data = importedData;
+        //     var metadata = data.metadata;
+        //     var wfreq = metadata.map(obj=>obj.idNo);
+        //     console.log(wfreq);
+
         d3.json("./data/samples.json").then((importedData) => {
             var data = importedData;
             var metadata = data.metadata;
-            var wfreq = metadata.map(obj=>obj.wfreq);
-            console.log(wfreq);
-    
+            console.log(metadata);
+            var filterIdData = metadata.filter(obj=>obj.id == idNo);
+                console.log(filterIdData);
+            
+            var washFreq = filterIdData.map(obj=> obj.wfreq);
+                console.log(washFreq);
+            
+        
         // Example from plotly with my edited data
             var data = [
                 {
                     domain: { x: [0, 1], y: [0, 1] },
-                    value: wfreq,
+                    value: 50,
                     title: { text: "Wash Frequency" },
                     type: "indicator",
                     mode: "gauge+number"
