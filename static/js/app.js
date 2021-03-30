@@ -76,6 +76,14 @@ id_selection = d3.select("#selDataset").on("change", optionChanged);
 
 // // // FUNCTION 'optionChanged' ON CHANGE: This function is called when a dropdown menu item is selected
 function optionChanged(idNo){
+    
+    addDemoInfo(idNo);
+    addCharts(idNo);
+};
+
+
+function addDemoInfo(idNo){
+
     info_table.html("");
     //Append data into table
     d3.json("./data/samples.json").then((importedData) => {
@@ -97,6 +105,29 @@ function optionChanged(idNo){
             });
     });
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function addCharts(idNo){
     // HORIZONTAL BAR CHART
     // Extract out id, otu_ids, sample_values
     d3.json("./data/samples.json").then((data) => {
@@ -153,7 +184,7 @@ function optionChanged(idNo){
         mode: 'markers',
         marker: {
             size: sample_vals, //marker size [40, 60, 80, 100,50,20,20,10,20,50], 
-            color: samp_otu_id, //otu_ids for the marker colours
+            color: samp_otu_id //otu_ids for the marker colours
         }
         
     };
@@ -174,6 +205,7 @@ function optionChanged(idNo){
 
 
 });
+
 };
 
  // var idNo = metadata.map(obj=>obj.id);
