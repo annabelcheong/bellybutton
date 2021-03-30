@@ -35,8 +35,9 @@ function init() {
     d3.json("./data/samples.json").then((importedData) => {
         var data = importedData;
         var names_list = data.names;
-            console.log(names_list);
+            // console.log(names_list);
 
+        //// Create dropdown of ids ////
         names_list.forEach((idNo)=>{
             console.log(idNo);
             //Append into html <option> and the idNo as the value
@@ -44,32 +45,44 @@ function init() {
             .append('option')
             .text(idNo)
             .property('value');
-            });
+        });
     
+        //// Print html text to remind user they can select dropdown of ids ////
+        // Clear out anything in the html within id '#sample-metadata'
+        info_table = d3.select("#sample-metadata");
+        //remove everything in the sample-metadata
+        info_table.html("");
+        //Append data into the table 
+
+        info_table.append("p")
+        .text("In the above dropdown, select an ID.");
     
-    
-    info_table = d3.select("#sample-metadata");
-    //remove everything in the sample-metadata
-    info_table.html("");
-    //Append data into the table 
+        //////////////////////////////////////////////////////////////
+        //// TO ADD DEMO INFO AND CHARTS FOR ID 940 (First IdNo). ////
+        //////////////////////////////////////////////////////////////
 
-    info_table.append("p")
-    .text("In the above dropdown, select an ID.");
-  
-    //////////////////////////////////////////////////////////////
-    //// TO ADD DEMO INFO AND CHARTS FOR ID 940 (First IdNo). ////
-    //////////////////////////////////////////////////////////////
+        // Extract out the first idNo from names_list which contains all the idNos and name it as variable 'firstId'
+        firstId = names_list[0];
 
-     // Extract out the first idNo from names_list which contains all the idNos and name it as variable 'firstId'
-    firstId = names_list[0];
+        // Run function to add Demo Info about id 940.
+        addDemoInfo(firstId); 
 
-    // addDemoInfo(firstId); 
-    addDemoInfo(firstId);  
-    addCharts(firstId);
+        info_table = d3.select("#sample-metadata");
+        //Append data into the table 
+        info_table.append("p")
+        .text("In the above dropdown, select an ID.");
+
+        // Run function to add Charts Info about id 940.
+        addCharts(firstId);
+
+        // Run function to add Gauge about id 940.
+        addGauge();
+            // $.getscript("bonus.js",function(){
+            //     addGauge();
+            // });
+
+
     });
-
-
-    
 
 };
         
@@ -77,10 +90,10 @@ function init() {
 id_selection = d3.select("#selDataset").on("change", optionChanged);
 
 // // // FUNCTION 'optionChanged' ON CHANGE: This function is called when a dropdown menu item is selected
-function optionChanged(idNo){
-    
+function optionChanged(idNo){    
     addDemoInfo(idNo);
     addCharts(idNo);
+    addGauge(idNo);
 };
 
 
