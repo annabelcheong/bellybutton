@@ -35,17 +35,19 @@ function init() {
     d3.json("./data/samples.json").then((importedData) => {
         var data = importedData;
         var names_list = data.names;
-        
-        names_list.forEach((name_ID)=>{
-            console.log(name_ID);
-            //Append into html <option> and the name_ID as the value
+            console.log(names_list);
+
+        names_list.forEach((idNo)=>{
+            console.log(idNo);
+            //Append into html <option> and the idNo as the value
             dropdownMenu
             .append('option')
-            .text(name_ID)
+            .text(idNo)
             .property('value');
             });
-    });
-
+    
+    
+    
     info_table = d3.select("#sample-metadata");
     //remove everything in the sample-metadata
     info_table.html("");
@@ -53,21 +55,21 @@ function init() {
 
     info_table.append("p")
     .text("In the above dropdown, select an ID.");
+  
+    //////////////////////////////////////////////////////////////
+    //// TO ADD DEMO INFO AND CHARTS FOR ID 940 (First IdNo). ////
+    //////////////////////////////////////////////////////////////
+
+     // Extract out the first idNo from names_list which contains all the idNos and name it as variable 'firstId'
+    firstId = names_list[0];
+
+    // addDemoInfo(firstId); 
+    addDemoInfo(firstId);  
+    addCharts(firstId);
+    });
+
+
     
-    // row = info_table.append("p")
-    // row.text("id: ";
-    // row = info_table.append("p")
-    // row.text("ethnicity: ");
-    // row = info_table.append("p")
-    // row.text("gender: ");
-    // row = info_table.append("p")
-    // row.text("age: ");
-    // row = info_table.append("p")
-    // row.text("location: ");
-    // row = info_table.append("p")
-    // row.text("bbtype: ");
-    // row = info_table.append("p")
-    // row.text("wfreq: ");
 
 };
         
@@ -106,24 +108,6 @@ function addDemoInfo(idNo){
     });
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
