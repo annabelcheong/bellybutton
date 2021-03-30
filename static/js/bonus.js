@@ -4,11 +4,11 @@ function addGauge(idNo){
     info_table = d3.select("#gauge");
 
     //Remove everything in the sample-metadata
-    info_table.html("");
+    // info_table.html("");
 
     //Append data into the table 
-    info_table.append("p")
-    .text("This is placeholder for the gauge");
+    // info_table.append("p")
+    // .text("This is placeholder for the gauge");
 
     // Use D3 fetch to read the JSON file
     // The data from the JSON file is arbitrarily named importedData as the argument
@@ -25,7 +25,7 @@ function addGauge(idNo){
             var filterIdData = metadata.filter(obj=>obj.id == idNo);
                 console.log(filterIdData);
             
-            var washFreq = filterIdData.map(obj=> obj.wfreq);
+            var washFreq = filterIdData.map(obj=> obj.wfreq)[0];
                 console.log(washFreq);
             
         
@@ -33,10 +33,11 @@ function addGauge(idNo){
             var data = [
                 {
                     domain: { x: [0, 1], y: [0, 1] },
-                    value: 50,
+                    value: washFreq,
                     title: { text: "Wash Frequency" },
                     type: "indicator",
-                    mode: "gauge+number"
+                    mode: "gauge+number",
+                    gauge: {axis:{range:[null,7]}}
                 }
             ];
             

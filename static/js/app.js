@@ -93,7 +93,7 @@ id_selection = d3.select("#selDataset").on("change", optionChanged);
 function optionChanged(idNo){    
     addDemoInfo(idNo);
     addCharts(idNo);
-    addGauge();
+    addGauge(idNo);
 };
 
 
@@ -194,7 +194,7 @@ function addCharts(idNo){
         yaxis:{title:"Count"},
         showlegend: false,
         height: 600,
-        width: 600
+        width: 1200
     };
 
     Plotly.newPlot("bubble", data1, layout1);
