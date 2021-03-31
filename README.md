@@ -10,14 +10,14 @@ This repository contains:
 - This is the deployed page 
 
 # FOLDER: data
-	- samples.json
-		- This json file was provided. It contains the raw data all contained in an object.
+- ## FILE: samples.json
+	- This json file was provided. It contains the raw data all contained in an object.
 
 # FOLDER: static
-	- js
-		- app.js
-			- This javascript file contains the code to output the information for the demographic information box, bar chart and bubble chart.
+- ## FOLDER: js
+	- ### FILE: app.js
+		- This javascript file contains the code to output the information for the demographic information box, bar chart and bubble chart.
 
 
-		- bonus.js
-			- This javascript file contains the code to output the gauge.
+	- ### FILE: bonus.js
+		- This javascript file contains the code to output the gauge.
