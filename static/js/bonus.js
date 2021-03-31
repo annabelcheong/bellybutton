@@ -55,11 +55,11 @@ function addGauge(idNo){
                     axis: { range: [null, 10] },
                     bar: { color: "black"},
                     steps: [
-                      { range: [0, 2], color: "red" },
-                      { range: [2, 4], color: "orange" },
-                      { range: [4, 6], color: "yellow" },
-                      { range: [6, 8], color: "yellowgreen" },
-                      { range: [8, 10], color: "green" }
+                      { range: [0, 2], color: "#c94c4c" },
+                      { range: [2, 4], color: "#f2ae72" },
+                      { range: [4, 6], color: "#ffef96" },
+                      { range: [6, 8], color: "#b1cbbb" },
+                      { range: [8, 10], color: "#A0DAA9" }
                     ],
                   }
                 }
